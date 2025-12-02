@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vince HomeDecor</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body style="background: url('image/back2.jpg') no-repeat center center fixed; background-size: cover;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <span class="brand-icon">🏡</span> Vince HomeDecor
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav me-3">
+          <!-- In the navbar section, update the ul with navbar-nav -->
+<ul class="navbar-nav me-3">
+  <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+  <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+  <li class="nav-item"><a class="nav-link" href="#cartSection">Cart</a></li>
+  <!-- Add this new Orders link -->
+  <li class="nav-item"><a class="nav-link" href="#ordersSection">Orders</a></li>
+  <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+        </ul>
+        <button id="authBtn" class="btn btn-outline-dark">
+          <i class="bi bi-person-circle"></i> Login
+        </button>
+      </div>
+    </div>
+  <div class="d-flex align-items-center me-3">
+</div>
+  </nav>
+
+  <!-- Login Section -->
+  <section id="loginSection" style="background: url('image/house background.jpg') no-repeat center center/cover;">
+    <div class="login-card">
+      <div class="login-logo">🏡</div>
+      <h2 class="fw-bold">Welcome to Vince HomeDecor</h2>
+      <p class="text-muted mb-4">Please log in to continue</p>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter your password">
+        </div>
+        <button id="loginBtn" class="btn btn-primary w-100 mt-2">Login</button>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main id="mainContent" class="d-none">
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center justify-content-center text-center text-white">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="fw-bold display-4">Decorate Your Dream Home</h1>
+        <p class="lead fs-5">Stylish, affordable, and elegant home decor pieces.</p>
+        <a href="#products" class="btn btn-light btn-lg mt-3 px-4 py-2">Shop Now</a>
+      </div>
+      <!-- inside .hero, after .hero-content -->
+<div class="hero-scroll-cue" aria-hidden="true">
+  Scroll
+  <span class="arrow">⬇</span>
+</div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-5 bg-white text-center">
+      <div class="container">
+        <h2 class="fw-bold mb-4 section-title">About Us</h2>
+        <p class="text-muted fs-5">
+          At <strong>Vince HomeDecor</strong>, we believe every home deserves a touch of beauty.
+          From handcrafted décor to modern designs, we curate stylish and affordable pieces that
+          transform any house into a cozy haven.
+        </p>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5 section-title">Our Home Decoration Collection</h2>
+        <div class="row g-4" id="productList"></div>
+      </div>
+    </section>
+
+    <!-- Cart -->
+    <section id="cartSection" class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5 section-title">Your Shopping Cart</h2>
+        <div id="cartItems" class="row g-4 text-center">
+          <!-- Cart items will be populated here -->
+        </div>
+        <div class="text-center mt-5">
+          <h4 id="totalPrice" class="mb-4">Total: ₱0</h4>
+          <button class="btn btn-success btn-lg px-5 py-3" id="checkoutBtn">
+            <i class="bi bi-bag-check-fill"></i> Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Receipt Modal (cleaned) -->
+    <div id="receiptModal" class="receipt-modal d-none">
+      <div class="receipt-content shadow-lg">
+        <h4 class="text-center fw-bold mb-2">Vince HomeDecor Receipt</h4>
+        <hr class="dotted-line">
+        <div id="receiptDetails" class="receipt-details"></div>
+        <hr class="dotted-line">
+        <p class="text-center fw-bold mt-3">THANK YOU!</p>
+        <button id="closeReceipt" class="btn btn-dark w-100 mt-3">Close</button>
+      </div>
+  <!-- inside receiptDetails (or receipt-content) add: -->
+    </div>
+
+<!-- Orders Section -->
+<section id="ordersSection" class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <h2 class="fw-bold section-title mb-0">Your Orders</h2>
+      <button id="clearAllOrders" class="btn btn-outline-danger btn-sm" style="display: none;">
+        <i class="bi bi-trash"></i> Clear All
+      </button>
+    </div>
+    <div id="ordersList" class="row g-4">
+      <!-- Orders will be populated here -->
+      <div class="col-12 text-center py-5">
+        <i class="bi bi-receipt display-1 text-muted mb-3"></i>
+        <p class="text-muted fs-5">You haven't placed any orders yet</p>
+        <a href="#products" class="btn btn-primary mt-2">Start Shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 contact-section">
+  <div class="contact-background"></div>
+  <div class="container position-relative">
+    <h2 class="text-center fw-bold mb-5 section-title">Get In Touch</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="contact-container">
+          <!-- Contact Information -->
+          <div class="contact-info-section">
+            <h3 class="fw-bold mb-4">Contact Information</h3>
+            <p class="mb-4">We'd love to hear from you. Reach out with any questions or feedback.</p>
+            
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div class="contact-text">
+                  <h5>Phone</h5>
+                  <p>+63 910 421 8998</p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <div class="contact-text">
+                  <h5>Address</h5>
+                  <p>Anilao Proper, Mabini, Batangas</p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="bi bi-envelope-fill"></i>
+                </div>
+                <div class="contact-text">
+                  <h5>Email</h5>
+                  <p>vincehomedecor@gmail.com</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="social-section mt-5">
+              <h5 class="mb-3">Follow Us</h5>
+              <div class="social-icons">
+                <a href="#" class="social-icon" title="Facebook">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="social-icon" title="Instagram">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="social-icon" title="Email">
+                  <i class="bi bi-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <div class="contact-form-section">
+            <h3 class="fw-bold mb-4">Send Us a Message</h3>
+            <form id="contactForm" class="contact-form">
+              <div class="form-floating mb-4">
+                <input type="text" id="contactName" class="form-control" placeholder="Full name">
+                <label for="contactName">Your Name</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input type="email" id="contactEmail" class="form-control" placeholder="you@example.com">
+                <label for="contactEmail">Email Address</label>
+              </div>
+              <div class="form-floating mb-4">
+                <textarea id="contactMessage" class="form-control" placeholder="How can we help?" style="height: 150px"></textarea>
+                <label for="contactMessage">Your Message</label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-send">
+                <i class="bi bi-send-fill me-2"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <footer class="bg-dark text-white text-center py-4">
+      <p class="mb-0">&copy; 2025 Vince HomeDecor. All rights reserved.</p>
+    </footer>
+  </main>
+
+
+  <!-- Back to top -->
+<button id="backToTop" aria-label="Back to top" title="Back to top">
+  <i class="bi bi-arrow-up-short" style="font-size:1.6rem;"></i>
+</button>
+
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.products = [
+      { name: "Wall Clock", price: 450, img: "image/wall clock.jpg" },
+      { name: "Table Lamp", price: 600, img: "image/Table Lamp.jpg" },
+      { name: "Flower Vase", price: 300, img: "image/flower Vase.jpg" },
+      { name: "Canvas Art", price: 750, img: "image/canvas art.jpeg" },
+      { name: "Throw Pillow", price: 250, img: "image/throw pillow.jpg" },
+      { name: "Decor Mirror", price: 900, img: "image/Deco Mirror.jpg" },
+      { name: "Wooden Frame", price: 350, img: "image/Wooden Frame.jpg" },
+      { name: "Rug Carpet", price: 1200, img: "image/Rug Carpet.jpg" },
+      { name: "Scented Candle", price: 200, img: "image/Scented Candle.jpg" },
+      { name: "Wall Shelf", price: 800, img: "image/Wall Shelf.jpg" },
+      { name: "Curtain Set", price: 1100, img: "image/Curtain Set.jpg" },
+      { name: "Decor Statue", price: 950, img: "image/Decor Statue.jpg" },
+      { name: "Table Centerpiece", price: 500, img: "image/Table Centerpiece.jpg" },
+      { name: "Indoor Plant", price: 400, img: "image/Indoor Plant.jpg" },
+      { name: "Pendant Light", price: 1300, img: "image/Pendat Light.jpg" },
+      { name: "Swing Round Chair", price: 1100, img: "image/Swing Round Chair.jpg" }
+    ];
+  </script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script> AOS.init({ duration: 700, once: true }); </script>
+</body>
+</html>
+
